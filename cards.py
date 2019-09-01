@@ -44,6 +44,23 @@ class Deck:
 		return self.cardDeck.pop()
 
 
+class Player:
+
+	# initialize player instance attrs
+	def __init__(self, player):
+		self.player_id = player
+		self.hand = []
+
+	# method for player to receive dealt cards
+	def receive_card(self, deck):
+		self.hand.append(deck.deal_card())
+
+	# method to view player hand
+	def view_hand(self):
+		for player_card in self.hand:
+			player_card.view_card()
+
+
 if __name__ == '__main__':
 	
 	my_deck = Deck()
@@ -59,3 +76,10 @@ if __name__ == '__main__':
 	dealt_2.view_card()
 
 	print(my_deck.get_cards_remaining())
+
+	john = Player('john')
+
+	john.receive_card(my_deck)
+	john.receive_card(my_deck)
+
+	john.view_hand()
