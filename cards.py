@@ -65,18 +65,6 @@ if __name__ == '__main__':
 	
 	my_deck = Deck()
 
-	my_deck.view_deck()
-
-	print('-----------dealing')
-
-	dealt_1 = my_deck.deal_card()
-	dealt_2 = my_deck.deal_card()
-
-	dealt_1.view_card()
-	dealt_2.view_card()
-
-	print(my_deck.get_cards_remaining())
-
 	john = Player('john')
 
 	john.receive_card(my_deck)
