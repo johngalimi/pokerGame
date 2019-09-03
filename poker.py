@@ -1,4 +1,5 @@
 import random
+from evaluator import Evaluator
 
 class Card:
 
@@ -23,7 +24,7 @@ class Deck:
 	# method to generate deck
 	def generate_deck(self):
 		for i in ['D', 'H', 'C', 'S']:
-			for j in range(1, 14):
+			for j in range(2, 15):
 				self.cardDeck.append(Card(i, j))
 
 	# method to shuffle deck
@@ -32,7 +33,7 @@ class Deck:
 
 	# method to get num cards remaining - check when dealing
 	def get_cards_remaining(self):
-		return len(self.cardDeck)
+		print(len(self.cardDeck))
 
 	# method to view entire deck
 	def view_deck(self):
@@ -76,12 +77,21 @@ class Player:
 
 class Hand:
 
-	# initialize hand instance attr
-	def __init__(self):
+	# initialize hand instance attrs
+	def __init__(self, player_list):
+		self.player_list = player_list
 		self.table_cards = []
 		self.pot = 0
 
+	# method to initially deal cards
+	def initial_deal(self, deck):
 
+		# refactor to elim nested for loop to cycle thru player list twice on deal
+		for i in range(2):
+			for player in self.player_list:
+				player.receive_card(deck)
+
+	# method to view cards currently on the table
 	def view_table(self):
 
 		print('----Table----')
@@ -89,7 +99,7 @@ class Hand:
 		for table_card in self.table_cards:
 			table_card.view_card()
 
-
+	# method to deal first three table cards, the "flop"
 	def deal_flop(self, deck):
 
 		flop_cards = 3
@@ -99,49 +109,75 @@ class Hand:
 
 			flop_cards -= 1
 
-
+	# method to deal either the 4th (turn) or 5th (river) card
 	def deal_turn_or_river(self, deck):
-
 		self.table_cards.append(deck.deal_card())
+
+	# method to evaluate hands to find winner
+	def evaluate_hands(self):
+
+		# create list of table cards as individual tuples
+		table = [(i.rank, i.suit) for i in self.table_cards]
+
+		players = []
+
+		# create list of lists for player cards as tuples
+		for player in self.player_list:
+			players.append([(i.rank, i.suit) for i in player.hand])
+
+		print('----Evaluating')
+
+		# create instance of hand evaluator
+		hand_evaluator = Evaluator(table, players)
+
+		# check for flush
+		hand_evaluator.evaluate_flush()
 
 
 class Game:
 
-	pass
+	# initialize Game instance attrs
+	def __init__(self, num_players):
+		# when a player gets knocked out, the number of players piped into a given instance of Hand will be decremented
+		self.num_players = num_players
+
+	# method to create all players for the game
+	def create_players(self):
+
+		player_holder = {}
+
+		for i in range(self.num_players):
+			player_holder[i] = Player(i, 100)
+
+		player_list = list(player_holder.values())
+
+		return player_list
 
 
 if __name__ == '__main__':
 	
+	my_game = Game(4)
+
+	my_players = my_game.create_players()
+
+	my_hand = Hand(my_players)
+
 	my_deck = Deck()
 
-	my_deck.view_deck()
+	my_deck.get_cards_remaining()
 
-	john = Player('john', 100)
+	my_hand.initial_deal(my_deck)
 
-	john.receive_card(my_deck)
-	john.receive_card(my_deck)
-
-	john.view_hand()
-
-	print(john.chips)
-
-	john.make_bet(7)
-
-	print(john.wager)
-	print(john.chips)
-
-	my_hand = Hand()
+	# maybe method to view all players at a table
+	for player in my_players:
+		player.view_hand()
 
 	my_hand.deal_flop(my_deck)
 
-	my_hand.view_table()
+	my_hand.deal_turn_or_river(my_deck)
 
 	my_hand.deal_turn_or_river(my_deck)
 
 	my_hand.view_table()
 
-	my_hand.deal_turn_or_river(my_deck)
-
-	my_hand.view_table()
-
-	print(my_deck.get_cards_remaining())
+	my_hand.evaluate_hands()
