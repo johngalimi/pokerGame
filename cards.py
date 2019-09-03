@@ -59,6 +59,9 @@ class Player:
 
 	# method to view player hand
 	def view_hand(self):
+
+		print(f'----Hand: {self.player}----')
+
 		for player_card in self.hand:
 			player_card.view_card()
 
@@ -76,6 +79,7 @@ class Hand:
 	# initialize hand instance attr
 	def __init__(self):
 		self.table_cards = []
+		self.pot = 0
 
 
 	def view_table(self):
@@ -111,8 +115,6 @@ if __name__ == '__main__':
 	my_deck = Deck()
 
 	my_deck.view_deck()
-
-	print('--------starting')
 
 	john = Player('john', 100)
 
