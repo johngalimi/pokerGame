@@ -48,8 +48,9 @@ class Player:
 
 	# initialize player instance attrs
 	def __init__(self, player):
-		self.player_id = player
+		self.player = player
 		self.hand = []
+		self.wager = 0
 
 	# method for player to receive dealt cards
 	def receive_card(self, deck):
@@ -59,6 +60,20 @@ class Player:
 	def view_hand(self):
 		for player_card in self.hand:
 			player_card.view_card()
+
+	# method to add on to total amt wagered
+	def make_bet(self, bet):
+		self.wager += bet
+
+
+class Hand:
+
+	pass
+
+
+class Game:
+
+	pass
 
 
 if __name__ == '__main__':
@@ -71,3 +86,7 @@ if __name__ == '__main__':
 	john.receive_card(my_deck)
 
 	john.view_hand()
+
+	john.make_bet(7)
+
+	print(john.wager)
