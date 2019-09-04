@@ -106,7 +106,6 @@ class Hand:
 
 		while flop_cards > 0:
 			self.table_cards.append(deck.deal_card())
-
 			flop_cards -= 1
 
 	# method to deal either the 4th (turn) or 5th (river) card
@@ -137,9 +136,10 @@ class Hand:
 class Game:
 
 	# initialize Game instance attrs
-	def __init__(self, num_players):
+	def __init__(self, num_players, starting_chips):
 		# when a player gets knocked out, the number of players piped into a given instance of Hand will be decremented
 		self.num_players = num_players
+		self.starting_chips = starting_chips
 
 	# method to create all players for the game
 	def create_players(self):
@@ -147,7 +147,7 @@ class Game:
 		player_holder = {}
 
 		for i in range(self.num_players):
-			player_holder[i] = Player(i, 100)
+			player_holder[i] = Player(i, self.starting_chips)
 
 		player_list = list(player_holder.values())
 
@@ -156,7 +156,7 @@ class Game:
 
 if __name__ == '__main__':
 	
-	my_game = Game(4)
+	my_game = Game(4, 100)
 
 	my_players = my_game.create_players()
 
@@ -171,6 +171,7 @@ if __name__ == '__main__':
 	# maybe method to view all players at a table
 	for player in my_players:
 		player.view_hand()
+		print(player.chips)
 
 	my_hand.deal_flop(my_deck)
 
@@ -181,3 +182,4 @@ if __name__ == '__main__':
 	my_hand.view_table()
 
 	my_hand.evaluate_hands()
+

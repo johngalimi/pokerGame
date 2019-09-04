@@ -47,10 +47,32 @@ class Evaluator:
 			print(i, ' Flush:', flush_exists[0], ' High:', flush_exists[1])
 
 
+	def is_straight(self, player):
+
+		all_ranks = [card[0] for card in self.table] + [card[0] for card in player]
+
+		all_ranks = sorted(all_ranks)
+
+		print(all_ranks)
+
+		distances = {}
+
+		for i in range(len(all_ranks)):
+
+			if i != len(all_ranks) - 1:
+
+				distances[i] = all_ranks[i + 1] - all_ranks[i]
+
+		print(distances)
+
+
+
 my_table = [(2, 'H'), (12, 'D'), (5, 'S'), (11, 'H'), (10, 'H')]
 
 my_players = [[(3, 'D'), (1, 'S')], [(3, 'C'), (2, 'D')], [(9, 'H'), (6, 'H')], [(6, 'D'), (8, 'H')]]
 
-# my_eval = Evaluator(my_table, my_players)
+my_eval = Evaluator(my_table, my_players)
+
+my_eval.is_straight(my_players[0])
 
 # my_eval.evaluate_flush()
