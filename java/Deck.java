@@ -1,6 +1,7 @@
 import java.util.*;
 
 public class Deck {
+	// want to migrate this to array list b/c removing from it and changing len
 	Card[] cardDeck = new Card[52];
 
 	public Deck() {
@@ -35,6 +36,11 @@ public class Deck {
 		Card[] cardDeck = cardDeckList.toArray(new Card[cardDeckList.size()]);
 
 		this.cardDeck = cardDeck;
+	}
+
+	public Card dealCard() {
+		// can use pop and remove at idx with arraylist
+		return cardDeck[0];
 	}
 
 	public static void main(String[] args) {
