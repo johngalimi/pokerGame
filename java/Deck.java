@@ -1,8 +1,16 @@
+import java.util.*;
+
 public class Deck {
 	Card[] cardDeck = new Card[52];
 
 	public Deck() {
 		this.cardDeck = cardDeck;
+	}
+
+	public void viewDeck() {
+		for (Card card : cardDeck) {
+			System.out.println(card.viewCard());
+		}
 	}
 
 	public void generateDeck() {
@@ -16,15 +24,23 @@ public class Deck {
 				count++;
 			}
 		}
-		
-		for (Card card : cardDeck) {
-			System.out.println(card.viewCard());
-		}
+	}
+
+	public void shuffleDeck() {
+
+		ArrayList<Card> cardDeckList = new ArrayList<Card>(Arrays.asList(cardDeck));
+
+		Collections.shuffle(cardDeckList);
+
+		Card[] cardDeck = cardDeckList.toArray(new Card[cardDeckList.size()]);
+
+		this.cardDeck = cardDeck;
 	}
 
 	public static void main(String[] args) {
 		Deck john = new Deck();
 		john.generateDeck();
+		john.shuffleDeck();
+		john.viewDeck();
 	}
-
 }
