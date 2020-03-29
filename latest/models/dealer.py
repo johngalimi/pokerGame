@@ -1,11 +1,12 @@
 from deck import Deck
+import common.constants as const
 
 class Dealer:
     def __init__(self):
         self.deck = Deck()
 
     def deal_preflop(self, players):
-        for i in range(2):
+        for i in range(const.hand_size):
             for player in players:
                 player.add_card(self.deck.deal_card())
 
@@ -15,7 +16,7 @@ class Dealer:
     def deal_community_cards(self, is_flop):
         self.burn_card()
         
-        num_cards = 3 if is_flop else 1
+        num_cards = const.flop_size if is_flop else const.turn_or_river_size
 
         return [self.deck.deal_card() for card in range(num_cards)]
 

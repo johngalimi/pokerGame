@@ -3,3 +3,7 @@ face_card_map = {
 }
 
 suits = ["H", "D", "S", "C"]
+
+hand_size = 2
+flop_size = 3
+turn_or_river_size = 1
