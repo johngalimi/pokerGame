@@ -4,9 +4,6 @@ class Dealer:
     def __init__(self):
         self.deck = Deck()
 
-    def get_new_deck(self):
-        self.deck = Deck()
-
     def deal_preflop(self, players):
         for i in range(2):
             for player in players:
@@ -21,7 +18,10 @@ class Dealer:
         num_cards = 3 if isFlop else 1
 
         return [self.deck.deal_card() for card in range(num_cards)]
-        
+
+    def get_new_deck(self):
+        self.deck = Deck()
+
 
 if __name__ == '__main__':
     dealer = Dealer()

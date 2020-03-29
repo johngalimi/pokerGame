@@ -15,10 +15,16 @@ class Table:
     def add_community_cards(self, cards):
         self.community_cards.extend(cards)
 
+    def check_table_state(self):
+        for player in self.players:
+            if player.chips == 0:
+                print(f'Removing Player ID: {player.id}')
+                self.players.remove(player)
+
     def show_table(self):
         print('---TABLE')
 
-        remaining_players = [player.id for player in self.players]
+        remaining_players = [(player.id, player.chips) for player in self.players]
         print('Remaining Players: ', remaining_players)
 
         print(f'Blinds: {self.small_blind}/{self.big_blind}')
@@ -34,21 +40,25 @@ class Table:
 if __name__ == '__main__':
     p1 = Player(1, 1000)
     p2 = Player(2, 1500)
+    p3 = Player(3, 200)
 
-    t = Table([p1, p2], 10)
+    t = Table([p1, p2, p3], 10)
 
     d = Dealer()
-    d.deck.show()
 
     d.deal_preflop(t.players)
 
     for player in t.players:
         player.show_hand()
 
-    d.deck.show()
-
     t.add_community_cards(d.deal_community_cards(True))
     t.add_community_cards(d.deal_community_cards(False))
     t.add_community_cards(d.deal_community_cards(False))
+
+    t.show_table()
+
+    p3.update_chips(-300)
+
+    t.check_table_state()
 
     t.show_table()
