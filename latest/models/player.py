@@ -2,7 +2,8 @@ from hand import Hand
 from deck import Deck
 
 class Player:
-    def __init__(self, buy_in):
+    def __init__(self, id, buy_in):
+        self.id = id
         self.chips = buy_in
         self.hand = Hand()
     
@@ -21,7 +22,7 @@ class Player:
 
 
 if __name__ == '__main__':
-    p = Player(100)
+    p = Player(1, 100)
 
     p.show_chips()
 
@@ -43,4 +44,14 @@ if __name__ == '__main__':
     p.add_card(d.deal_card())
 
     p.show_hand()
+
+    p.add_card(d.deal_card())
+
+    p.show_hand()
+
+    p.add_card(d.deal_card())
+
+    p.show_hand()
+
+    d.show()
 
