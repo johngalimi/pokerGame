@@ -21,6 +21,9 @@ class Table:
                 print(f'Removing Player ID: {player.id}')
                 self.players.remove(player)
 
+        if len(self.players) == 1:
+            print(f'Winner! Player ID: {self.players[0].id}')
+
     def show_table(self):
         print('---TABLE')
 
@@ -58,6 +61,14 @@ if __name__ == '__main__':
     t.show_table()
 
     p3.update_chips(-300)
+
+    t.check_table_state()
+
+    t.show_table()
+
+    p2.update_chips(-1500)
+
+    t.show_table()
 
     t.check_table_state()
 
