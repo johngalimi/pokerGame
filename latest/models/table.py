@@ -16,7 +16,7 @@ class Table:
     def add_community_cards(self, cards):
         self.community_cards.extend(cards)
 
-    def check_table_state(self):
+    def check_state(self):
         for player in self.players:
             if player.chips == 0:
                 print(f'Removing Player ID: {player.id}')
@@ -26,7 +26,7 @@ class Table:
             print(f'Winner! Player ID: {self.players[0].id}')
             self.is_game_over = True
 
-    def show_table(self):
+    def show(self):
         print('---TABLE')
 
         remaining_players = [(player.id, player.chips) for player in self.players]
@@ -60,18 +60,18 @@ if __name__ == '__main__':
     t.add_community_cards(d.deal_community_cards(False))
     t.add_community_cards(d.deal_community_cards(False))
 
-    t.show_table()
+    t.show()
 
     p3.update_chips(-300)
 
-    t.check_table_state()
+    t.check_state()
 
-    t.show_table()
+    t.show()
 
     p2.update_chips(-1500)
 
-    t.show_table()
+    t.show()
 
-    t.check_table_state()
+    t.check_state()
 
-    t.show_table()
+    t.show()

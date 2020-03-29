@@ -15,7 +15,6 @@ class Dealer:
 
     def deal_community_cards(self, is_flop):
         self.burn_card()
-        
         num_cards = const.flop_size if is_flop else const.turn_or_river_size
 
         return [self.deck.deal_card() for card in range(num_cards)]
