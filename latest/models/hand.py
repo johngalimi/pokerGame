@@ -5,6 +5,10 @@ class Hand:
         self.cards = []
 
     def receive_card(self, card):
+
+        if len(self.cards) == 2:
+            self.cards = []
+
         self.cards.append(card)
 
     def show(self):
@@ -23,4 +27,14 @@ if __name__ == '__main__':
 
     d.show()
 
+    h.show()
+
+    h.receive_card(d.deal_card())
+
+    d.show()
+    h.show()
+
+    h.receive_card(d.deal_card())
+
+    d.show()
     h.show()
