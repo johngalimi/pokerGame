@@ -1,5 +1,5 @@
 from player import Player
-from deck import Deck
+from dealer import Dealer
 
 class Table:
     def __init__(self, players, blind):
@@ -33,6 +33,13 @@ if __name__ == '__main__':
 
     t = Table([p1, p2], 10)
 
-    t.show_table()
+    d = Dealer()
+    d.deck.show()
 
+    d.deal_preflop(t.players)
+
+    for player in t.players:
+        player.show_hand()
+
+    d.deck.show()
     
