@@ -1,5 +1,4 @@
-import constants as const
-import os
+import common.constants as const
 
 class Card:
     def __init__(self, suit, rank):

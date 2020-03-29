@@ -1,4 +1,4 @@
-import constants as const
+import common.constants as const
 import random
 
 from card import Card
