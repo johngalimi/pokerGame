@@ -5,9 +5,9 @@ from card import Card
 
 class Deck:
     def __init__(self):
-        self.cards = self.generate_deck()
+        self.cards = self.generate()
     
-    def generate_deck(self):
+    def generate(self):
 
         deck = []
 
@@ -16,13 +16,27 @@ class Deck:
                 deck.append(Card(suit, rank))
 
         random.shuffle(deck)
-        
+
         return deck
+
+    def deal_card(self):
+        return self.cards.pop()
+
+    def show(self):
+        for card in self.cards:
+            card.show()
+
+        print("CARDS REMAINING:", len(self.cards))
+
 
 if __name__ == "__main__":
     d = Deck()
 
-    for card in d.cards:
-        card.show_card()
+    d.show()
 
-    print(len(d.cards))
+    card = d.deal_card()
+
+    print("DEALT CARD:")
+    card.show()
+
+    d.show()
