@@ -1,4 +1,6 @@
 import constants as const
+import random
+
 from card import Card
 
 class Deck:
@@ -13,11 +15,14 @@ class Deck:
             for rank in list(range(2, 15)):
                 deck.append(Card(suit, rank))
 
-        for card in deck:
-            card.show_card()
-
-        print(len(deck))
-
+        random.shuffle(deck)
+        
+        return deck
 
 if __name__ == "__main__":
     d = Deck()
+
+    for card in d.cards:
+        card.show_card()
+
+    print(len(d.cards))
