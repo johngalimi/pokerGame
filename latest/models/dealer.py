@@ -12,10 +12,16 @@ class Dealer:
             for player in players:
                 player.add_card(self.deck.deal_card())
 
-    def deal_flop(self):
-        pass
+    def burn_card(self):
+        self.deck.deal_card()
 
+    def deal_community_cards(self, isFlop):
+        self.burn_card()
+        
+        num_cards = 3 if isFlop else 1
 
+        return [self.deck.deal_card() for card in range(num_cards)]
+        
 
 if __name__ == '__main__':
     dealer = Dealer()

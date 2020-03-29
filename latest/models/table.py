@@ -12,8 +12,8 @@ class Table:
     def receive_chips(self, chips):
         self.pot += chips
 
-    def add_community_card(self, card):
-        self.community_cards += card
+    def add_community_cards(self, cards):
+        self.community_cards.extend(cards)
 
     def show_table(self):
         print('---TABLE')
@@ -23,6 +23,10 @@ class Table:
 
         print(f'Blinds: {self.small_blind}/{self.big_blind}')
         print('Pot: ', self.pot)
+
+        print('Community Cards:')
+        for card in self.community_cards:
+            card.show()
 
         print('---')
 
@@ -42,4 +46,9 @@ if __name__ == '__main__':
         player.show_hand()
 
     d.deck.show()
-    
+
+    t.add_community_cards(d.deal_community_cards(True))
+    t.add_community_cards(d.deal_community_cards(False))
+    t.add_community_cards(d.deal_community_cards(False))
+
+    t.show_table()
