@@ -8,6 +8,7 @@ class Table:
         self.pot = 0
         self.small_blind = blind
         self.big_blind = 2 * blind
+        self.is_game_over = False
 
     def receive_chips(self, chips):
         self.pot += chips
@@ -23,6 +24,7 @@ class Table:
 
         if len(self.players) == 1:
             print(f'Winner! Player ID: {self.players[0].id}')
+            self.is_game_over = True
 
     def show_table(self):
         print('---TABLE')

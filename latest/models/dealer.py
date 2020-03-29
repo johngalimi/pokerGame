@@ -12,10 +12,10 @@ class Dealer:
     def burn_card(self):
         self.deck.deal_card()
 
-    def deal_community_cards(self, isFlop):
+    def deal_community_cards(self, is_flop):
         self.burn_card()
         
-        num_cards = 3 if isFlop else 1
+        num_cards = 3 if is_flop else 1
 
         return [self.deck.deal_card() for card in range(num_cards)]
 
